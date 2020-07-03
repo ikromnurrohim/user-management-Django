@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% block content %}
+<div class="container">
+ <div class="row">
+	<div class="col-lg-12 d-flex justify-content-center">
+
+	<div class="card" style="width: 30rem; margin-top: 30px;">
+  		<div class="card-body">
+    	<h2 class="card-title">Login <hr></h2>
+	  
+    <form method="POST">
+	 	{% csrf_token %}
+	  	  <div class="form-group">
+			
+		    <label for="{{form.username.id_for_label}}"> Username : </label>
+		    <input type="username" name="username" value="{{form.username}}" class="form-control" required id="{{form.username.id_for_label}}" placeholder="Username...">
+		   </div>
+			
+
+		   <div class="form-group">
+
+		   	<label for="{{form.password.id_for_label}}"> Password : </label>
+		    <input type="password" name="password" value="{{form.password}}" class="form-control" required id="{{form.password.id_for_label}}" placeholder="Password...">
+		  </div>
+			
+
+			{% if request.GET.next %}
+				<input type="hidden" name="next" value="{{request.GET.next}}">
+			{% endif %}
+		  
+		  <button type="Submit" class="btn btn-primary">Submit</button>
+		</form>
+  </div>
+</div>
+	 
+	</div>
+
+</div>
+</div>
+{% endblock content %}

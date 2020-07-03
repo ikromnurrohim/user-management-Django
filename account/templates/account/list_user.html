@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+	<br>
+<br>
+<h2>Managemen User</h2>
+<br>
+<a class="text-light btn btn-primary" href="{% url 'accounts:create_user' %}">Create User</a>
+<br>
+<br>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+			<th>No</th>
+			<th>Username</th>
+			<th>Email</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Permissions</th>
+			<th>Password</th>
+			<th>Manage</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in list_user %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{user.username}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.first_name}}</td>
+					<td>{{user.last_name}}</td>
+					<td><ul>
+						<li>Active : {{user.is_active}}</li>
+						<li>Staff : {{user.is_staff}}</li>
+						<li>Superser : {{user.is_superuser}}</li>
+					</ul></td>
+					<td>{{user.password|truncatechars:9}}</td>
+					<td class="colspan-2">	
+						<a class="text-light btn btn-success" href="{% url 'accounts:update_user' user.pk %}">Edit</a>
+						<a class="text-light btn btn-danger" href="{% url 'accounts:delete_user' user.pk %}">Delete</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		
+	</table>
+</div>
+{% endblock content %}
